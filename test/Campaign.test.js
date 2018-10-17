@@ -45,6 +45,43 @@ describe('Campaigns', () => {
     });
 
     it('marks caller as campaign manager', async () => {
-        const manager = await campaign.methods.manager().call(); // manager() is automatically created by solidity by mention it public
+        const manager = await campaign.methods.manager().call(); // manager() is automatically created by solidity by setting the field public
+        assert.equal(accounts[0], manager);
+    });
+
+    it('let people contribute and mark them as approvers', async () => {
+        await campaign.methods.contribute().send({
+            value: 200,
+            from: accounts[1]
+        });
+
+        const isApprover = await campaign.methods.approvers(accounts[1]).call();
+        assert(isApprover); // checks true
+    });
+
+    it('require minimum value contribution', async () => {
+        try {
+            await campaign.methods.contribute().send({
+                from: accounts[1],
+                value: '5' // < 100
+            });
+            assert(false); // if this line gets executed it means test failed
+        }
+        catch (error) {
+            // console.log('error: ', error);
+            assert(error);
+        }
+    });
+
+    it('allows manager to make a request', async() => {
+        await campaign.methods.createRequest('buy stuff', '100', accounts[1]).send({
+            from: accounts[0],
+            gas: '1000000'
+        });
+        const request = await campaign.methods.requests(0).call();
+        console.log('request: ', request.description);
+
+        assert.equal(100, request.value)
+        
     })
 })
