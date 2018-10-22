@@ -1,9 +1,11 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const compiledFactory = require('./build/CampaignFactory.json');
+const truffleWalletParams = require('../params.dev');
+
 const provider = new HDWalletProvider(
-    'joke planet party damage powder comfort step country clean join easily popular', //mneumonic for the rinkeby account
-    'https://rinkeby.infura.io/v3/2b0ca63792bc4ec5a398c157293ef54f' //infura endpoint
+    truffleWalletParams.mneumonic, //mneumonic for the rinkeby account
+    truffleWalletParams.infuraUrl //infura endpoint
 );
 
 const web3 = new Web3(provider);
@@ -20,4 +22,4 @@ const deploy = async () => {
     console.log('factory contract deployed to: ', result.options.address);
 };
 
-deploy();
+// deploy();
