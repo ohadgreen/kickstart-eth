@@ -8,6 +8,7 @@
 /campaign_factory_address.txt
 
 # misc
+params.dev.js
 .DS_Store
 .env.local
 .env.development.local
