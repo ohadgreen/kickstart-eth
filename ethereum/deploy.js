@@ -14,6 +14,7 @@ const web3 = new Web3(provider);
 const deploy = async () => {
     const accounts = await web3.eth.getAccounts();
     console.log('trying to deploy from account:', accounts[0]);
+    console.log('infuraUrl: ' + truffleWalletParams.infuraUrl);
 
     const result = await new web3.eth.Contract(JSON.parse(compiledFactory.interface)) // contract interfact = ABI
         .deploy({ data: '0x' + compiledFactory.bytecode })
@@ -22,4 +23,4 @@ const deploy = async () => {
     console.log('factory contract deployed to: ', result.options.address);
 };
 
-// deploy();
+deploy();
