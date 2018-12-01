@@ -85,7 +85,7 @@ class CampaignShow extends React.Component {
                     </Grid.Row>
                     <Grid.Row>
                         <Grid.Column>
-                        <Link route={`/campaigns/${this.props.address}/requests`}>
+                            <Link route={`/campaigns/${this.props.campaignAddress}/requests`}>
                             <a>
                                 <Button primary={true}>View Requests</Button>
                             </a>
