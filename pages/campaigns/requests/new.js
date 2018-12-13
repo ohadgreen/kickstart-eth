@@ -56,8 +56,8 @@ class NewRequest extends React.Component {
                     <Form.Field>
                         <label>Description</label>
                         <Input
-                            value={this.state.descrition}
-                            onChange={(e) => { this.setState({ descrition: e.target.value }) }}
+                            value={this.state.description}
+                            onChange={(e) => { this.setState({ description: e.target.value }) }}
                         />
                     </Form.Field>
                     <Form.Field>
